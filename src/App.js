@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React,  {useEffect, useState} from "react";
 
 function App() {
+  const [totalTimeInsecondes, settotalTimeInsecondes] = useState((5)) 
+
+  const minutes = Math.floor (totalTimeInsecondes / 60)
+  const seconds = totalTimeInsecondes % 60
+
+  useEffect(() => {
+    if(totalTimeInsecondes === 0) {
+      alert("O tempo acabou!")
+        return
+    }else {
+      setTimeout(() => {
+        settotalTimeInsecondes(totalTimeInsecondes - 1)
+  
+      }, 1000)
+
+    }
+  }, [totalTimeInsecondes])
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <span>{minutes.toString().padStart(2, "0")}</span>
+      <span>:</span>
+      <span>{seconds.toString().padStart(2, "0")}</span>
+    
     </div>
   );
 }
